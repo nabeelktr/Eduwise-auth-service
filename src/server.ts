@@ -3,6 +3,8 @@ import * as grpc from "@grpc/grpc-js"
 import * as protoLoader from "@grpc/proto-loader" 
 import "dotenv/config"
 import { ProtoGrpcType } from "../proto/auth";
+import { Authcontroller } from "./controller/authController";
+import { AuthHandlers } from "../proto/authpackage/Auth";
 
 
 const packageDef = protoLoader.loadSync(path.resolve(__dirname, './protos/auth.proto'))
@@ -11,7 +13,7 @@ const authpackage = grpcObject.authpackage
 
 
 
-// const controller = new UserController()
+const controller = new Authcontroller()
 
 const server = new grpc.Server()
 
@@ -29,7 +31,8 @@ const grpcServer = () => {
 }
 
 server.addService(authpackage.Auth.service, {
-
-} )
+    IsAuthenticated : controller.isAuthenticated,   
+    RefreshToken: controller.verifyToken
+} as AuthHandlers )
 
 grpcServer();
