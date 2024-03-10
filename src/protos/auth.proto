@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package authpackage;
+
+service Auth{
+  rpc IsAuthenticated(AuthReq) returns(AuthRes) {};
+}
+
+message AuthReq {
+  string token = 1;
+}
+
+message AuthRes {
+  string message = 1;
+}
