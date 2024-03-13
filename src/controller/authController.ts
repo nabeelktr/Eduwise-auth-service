@@ -1,7 +1,6 @@
 import { AuthHandlers } from "../../proto/authpackage/Auth";
 import jwt, { Secret } from 'jsonwebtoken'
 import "dotenv/config"
-
 export class Authcontroller {
 
 
